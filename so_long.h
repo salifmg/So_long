@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/03 20:02:45 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:03:10 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,41 @@
 # include <X11/Xutil.h>
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
+# include "get_next_line/get_next_line.h"
+
+# define GSIZE 64
 
 typedef struct	s_data
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
+	
+	char	**map;
+
 	char	*addr;
+	char	*name;
+	char	*charact;
+	char	*collect;
+	char	*exit;
+	char	*tileset;
+	char	*wall;
+	
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 }				t_data;
+
+int		up_arrow(void);
+int		down_arrow(void);
+int		left_arrow(void);
+int		right_arrow(void);
+int 	key_handler(int keycode, t_data *mlx);
+int 	current_state(t_data *mlx);
+int		close_window(t_data *mlx);
+
+void	free_and_exit(t_data *mlx);
+void	*ft_put_img(t_data *mlx, char *path);
+void	img_to_display(t_data *mlx);
 
 #endif
