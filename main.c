@@ -6,11 +6,22 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:44:39 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/04 20:14:28 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:12:51 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+	exit (1);
+}
 
 void	free_and_exit(t_data *mlx)
 {
@@ -54,14 +65,17 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return(1);
 	mlx.name = av[1];
-	if (check_extension(mlx.name) == 1)
+	if (check_extension(mlx.name) == 0)
 		return(1);
 	mlx.map = init_map(mlx.name);
-	
-	
 	if (!mlx.map)
-		return (1);
+		free_map(mlx.map);
+	if (check_all(mlx.map) == 0)
+		free_map(mlx.map);
 
+
+
+	
 	mlx.mlx = mlx_init();
 	if (mlx.mlx == NULL)
 

@@ -6,13 +6,15 @@
 #    By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/21 12:19:58 by smagassa          #+#    #+#              #
-#    Updated: 2024/11/04 17:29:07 by smagassa         ###   ########.fr        #
+#    Updated: 2024/11/05 18:26:42 by smagassa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c        \
 		movements.c	       \
-		img_to_display.c
+		img_to_display.c        \
+		map_parsing.c           \
+		check_walls.c
 
 NAME = so_long
 
