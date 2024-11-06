@@ -6,15 +6,21 @@
 #    By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/21 12:19:58 by smagassa          #+#    #+#              #
-#    Updated: 2024/11/05 18:26:42 by smagassa         ###   ########.fr        #
+#    Updated: 2024/11/06 21:07:27 by smagassa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c        \
-		movements.c	       \
+		check_access.c        \
+		check_walls.c          \
+		destroyer.c         \
 		img_to_display.c        \
-		map_parsing.c           \
-		check_walls.c
+		init_lists.c        \
+		init_map.c        \
+		map_parsing.c          \
+		movements.c          \
+		get_next_line/get_next_line.c        \
+		get_next_line/get_next_line_utils.c
 
 NAME = so_long
 

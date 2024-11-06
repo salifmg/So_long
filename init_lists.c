@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   init_lists.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:37:39 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:01:04 by smagassa         ###   ########.fr       */
+/*   Created: 2024/11/06 14:03:46 by smagassa          #+#    #+#             */
+/*   Updated: 2024/11/06 20:24:50 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-int	ft_strlen(const char *s)
+void	init_lists(t_data *mlx)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	mlx->mlx = NULL;
+	mlx->win = NULL;
+	mlx->img = NULL;
+	mlx->map = NULL;
+	mlx->charact = NULL;
+	mlx->collect = NULL;
+	mlx->exit = NULL;
+	mlx->tileset = NULL;
+	mlx->wall = NULL;
+	mlx->x = 0;
+	mlx->y = 0;
+	mlx->nb_collect = 0;
 }

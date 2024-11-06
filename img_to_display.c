@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:49:02 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/04 17:42:18 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:59:30 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,51 @@ void	img_to_display(t_data *mlx)
 	mlx->exit = ft_put_img(mlx, "images/exit.xpm");
 	mlx->tileset = ft_put_img(mlx, "images/tileset.xpm");
 	mlx->wall = ft_put_img(mlx, "images/wall.xpm");
+}
+
+void	print_graphics(char **map, t_data *mlx)
+{
+	int	i;
+	int	i2;
+
+	i = 0;
+	while (map[i])
+	{
+		i2 = 0;
+		while (map[i][i2])
+		{
+			select_image(map[i][i2], mlx, i2, i);
+			i2++;
+		}
+		i++;
+	}
+}
+
+void	select_image(char map, t_data *mlx, int x, int y)
+{
+	if (map == 'P')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->charact,
+			GSIZE * x, GSIZE * y);
+	}
+	else if (map == 'C')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->collect,
+				GSIZE * x, GSIZE * y);
+	}
+	else if (map == 'E')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->exit,
+				GSIZE * x, GSIZE * y);
+	}
+	else if (map == '0')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tileset,
+				GSIZE * x, GSIZE * y);
+	}
+	else if (map == '1')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->wall,
+				GSIZE * x, GSIZE * y);
+	}
 }
