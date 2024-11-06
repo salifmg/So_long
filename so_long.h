@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/05 16:58:36 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/06 01:31:13 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include "minilibx-linux/mlx.h"
 # include "get_next_line/get_next_line.h"
 
-# define GSIZE 64
+# define GSIZE 32
 
 typedef struct	s_data
 {
@@ -39,8 +39,7 @@ typedef struct	s_data
 	
 	char	**map;
 	
-	char	*addr;
-	
+	// char	*addr;	
 	char	*name;
 	char	*charact;
 	char	*collect;
@@ -48,21 +47,27 @@ typedef struct	s_data
 	char	*tileset;
 	char	*wall;
 	
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int		x;
+	int		y;
+	int		exit;
+	int		start;
+	int		collect;
+	// int		bits_per_pixel;
+	// int		line_length;
+	// int		endian;
 }				t_data;
 
 int		map_lenght(char	*name);
 int		one_start_end(char **map);
 int		row_of_one(char *map);
-int		corners_ones(char **map);
-int		check_all(char **map);
-int		top_bottom(char **map);
+int		corners_ones(char **map, t_data *mlx);
+int		check_all(char **map, t_data *mlx);
+int		top_bottom(char **map, t_data *mlx);
 int		check_extension(char *name);
-int		check_rectangle(char **map);
-int		check_walls(char **map);
-int		check_events(char **map, int exit, int start, int collect);
+int		check_rectangle(char **map, t_data *mlx);
+int		check_walls(char **map, t_data *mlx);
+int		check_events_access(map, mlx);
+int		check_events(char **map, t_data *mlx, int exit, int start, int collect);
 
 int		up_arrow(void);
 int		down_arrow(void);

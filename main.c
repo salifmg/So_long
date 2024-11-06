@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:44:39 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/05 15:12:51 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:28:42 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 	mlx.map = init_map(mlx.name);
 	if (!mlx.map)
 		free_map(mlx.map);
-	if (check_all(mlx.map) == 0)
+	if (check_all(mlx.map, &mlx) == 0)
 		free_map(mlx.map);
 
 

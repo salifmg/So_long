@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:25:44 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/05 18:26:59 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:46:51 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,23 @@ int	row_of_one(char *map)
 	return (1);
 }
 
-int	top_bottom(char **map)
+int	top_bottom(char **map, t_data *mlx)
 {
-	int	i;
-	int	i2;
-
-	i = 0;
-	i2 = 0;
-	if (row_of_one(map[i][i2]) == 0)
-		return (0);
-	while (map[i + 1])
-		i++;
-	if (row_of_one(map[i][i2]) == 0)
+	if (row_of_one(map[0][0]) == 0 || row_of_one(map[mlx.y][0]) == 0)
 		return (0);
 	return (1);
 }
 
-int	corners_ones(char **map)
+int	corners_ones(char **map, t_data *mlx)
 {
 	int	i;
-	int	i2;
-	int	last;
 
 	i = 0;
-	i2 = 0;
-	last = ft_strlen(map[i]);
 	while (map[i])
 	{
-		if (map[i][i2] != '1')
+		if (map[i][0] != '1')
 			return (0);
-		if (map[i][last] != '1')
+		if (map[i][mlx.y] != '1')
 			return (0);
 		i++;
 	}
