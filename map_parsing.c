@@ -6,16 +6,28 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:27:21 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 18:21:33 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:14:18 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int	ft_strln(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
+
 int check_valid(char map)
 {
-	if (map == '1' || map == '0' || map == 'P' || map == 'E' || map == 'C')
+	printf("%d\n", map);
+	if (map == '1' || map == '0' || map == 'P' || map == 'E' || map == 'C' || map == '\n')
 		return (1);
+	printf("BUG");
 	return (0);
 }
 
@@ -28,6 +40,7 @@ int	check_events(char **map, t_data *mlx, int exit, int start, int collect)
 	while (map[i])
 	{
 		i2 = 0;
+		printf("%c", map[i][i2]);
 		while (map[i][i2])
 		{
 			if (map[i][i2] == 'E')
@@ -42,6 +55,7 @@ int	check_events(char **map, t_data *mlx, int exit, int start, int collect)
 		}
 		i++;
 	}
+	printf("OK");
 	if (exit != 1 || start != 1 || collect < 1)
 		return (0);
 	mlx->nb_collect = collect;
@@ -53,13 +67,13 @@ int	check_rectangle(char **map, t_data *mlx)
 	int	y;
 
 	y = 0;
-	mlx->x = ft_strlen(map[0]);
-	while (map[y + 1])
+	mlx->x = ft_strln(map[0]);
+	while (y != mlx->y)
 	{
-		if (mlx->x != ft_strlen(map[++y]))
+		if (mlx->x != ft_strln(map[y]))
 			return (0);
+		y++;
 	}
-	mlx->y = y;
 	if (mlx->y < 2 || mlx->x < 2 || mlx->y == mlx->x)
 		return (0);
 	else if ((mlx->y == 2 && mlx->x > 4) || (mlx->x == 2 && mlx->y > 4))
@@ -80,5 +94,6 @@ int	check_all(char **map, t_data *mlx)
 			check_events(map, mlx, 0, 0, 0) == 0 ||
 			check_events_access(map, mlx))
 		return (0);
+	printf("OK");
 	return (1);
 }

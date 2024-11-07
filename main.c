@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:44:39 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:17:47 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:05:46 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return(1);
-	mlx.name = av[1];
 	init_lists(&mlx);
 
-	if (check_extension(mlx.name) == 0)
+	if (check_extension(av[1]) == 0)
 		return(1);
-	mlx.map = init_map(mlx.name);
+	mlx.map = init_map(av[1], &mlx);
 	if (!mlx.map)
 	{
 		free_map(mlx.map);
@@ -72,11 +71,11 @@ int	main(int ac, char **av)
 
 	mlx.img = mlx_new_image(mlx.mlx, GSIZE, GSIZE);
 	img_to_display(&mlx);
-	print_graphics(mlx.map, &mlx);
 	
 	mlx_loop_hook(mlx.mlx, &current_state, &mlx);
-	mlx_key_hook(mlx.win, key_handler, &mlx);
 	mlx_hook(mlx.win, 17, 1L << 0, close_window, &mlx);
+	mlx_key_hook(mlx.win, key_handler, &mlx);
+	print_graphics(mlx.map, &mlx); //surement dans le loop hook
 	mlx_loop(mlx.mlx);
 	free_and_exit(&mlx);
 	return (0);

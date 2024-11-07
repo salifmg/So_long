@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:03:46 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:24:50 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:59:06 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_lists(t_data *mlx)
 	mlx->win = NULL;
 	mlx->img = NULL;
 	mlx->map = NULL;
+	mlx->name = NULL;
 	mlx->charact = NULL;
 	mlx->collect = NULL;
 	mlx->exit = NULL;
@@ -25,5 +26,7 @@ void	init_lists(t_data *mlx)
 	mlx->wall = NULL;
 	mlx->x = 0;
 	mlx->y = 0;
+	mlx->x_pos = 0;
+	mlx->y_pos = 0;
 	mlx->nb_collect = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:53:32 by smagassa          #+#    #+#             */
-/*   Updated: 2024/06/12 20:35:30 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:48:51 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ int	strlen_const(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
+	char	*dest;
 	int		i;
-	char	*stock;
 
 	i = 0;
-	stock = (char *) malloc(sizeof(char) * strlen_const(src) + 1);
-	if (stock == NULL)
+	dest = malloc(sizeof(unsigned char) * (ft_strlen(src)) + 1);
+	if (!dest)
 		return (NULL);
 	while (src[i])
 	{
-		stock[i] = src[i];
+		dest[i] = src[i];
 		i++;
 	}
-	stock[i] = '\0';
-	return (stock);
+	dest[i] = '\0';
+	return (dest);
 }

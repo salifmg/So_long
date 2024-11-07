@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 01:28:04 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:07:31 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:07:44 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	check_events_access(char **map, t_data *mlx)
 		map_cpy[i] = ft_strdup(map[i]);
 		i++;
 	}
+	map_cpy[i] = NULL;
 	start_position(map_cpy, mlx);
 	if (check_events_cpy(map_cpy) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 17:52:02 by smagassa          #+#    #+#             */
-/*   Updated: 2024/06/08 18:35:59 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:37:20 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	strlenconst(const char *str)
 	return (i);
 }
 
-char	*cpynext(char *dest, const char *src, const char *src2)
+char	*cpynexte(char *dest, const char *src, const char *src2)
 {
 	int		i;
 	int		n;
@@ -43,18 +43,33 @@ char	*cpynext(char *dest, const char *src, const char *src2)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*stock;
+	size_t	i;
+	size_t	j;
+	char	*p;
 
-	if (s1 == NULL && s2 == NULL)
+	i = -1;
+	j = 0;
+	if (!s1)
+	{
+		s1 = (char *)malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	p = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!p)
 		return (NULL);
-	stock = (char *)malloc((strlenconst(s1) + strlenconst(s2) + 1)
-			* sizeof(char));
-	if (stock == NULL)
-		return (NULL);
-	cpynext(stock, s1, s2);
-	return (stock);
+	while (s1[++i])
+		p[i] = s1[i];
+	while (s2[j])
+	{
+		p[i] = s2[j];
+		i++;
+		j++;
+	}
+	p[i] = '\0';
+	free(s1);
+	return (p);
 }
 
 /*int main(void)

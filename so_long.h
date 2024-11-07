@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:53:56 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:30:38 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ typedef struct	s_data
 	// int		endian;
 }				t_data;
 
-int		map_lenght(char	*name);
+int		ft_strln(char *str);
+int		map_size(char *name, t_data *mlx);
 int		one_start_end(char **map);
 int		row_of_one(char *map);
 int		corners_ones(char **map, t_data *mlx);
 int		top_bottom(char **map, t_data *mlx);
-int		check_extension(char *name);
+int		check_extension(char *n);
 int		check_rectangle(char **map, t_data *mlx);
 int		check_walls(char **map, t_data *mlx);
 int		check_all(char **map, t_data *mlx);
@@ -79,7 +80,7 @@ int 	key_handler(int keycode, t_data *mlx);
 int 	current_state(t_data *mlx);
 int		close_window(t_data *mlx);
 
-char	**init_map(char	*name);
+char	**init_map(char	*name, t_data *mlx);
 
 void	init_lists(t_data *mlx);
 void	free_map(char **map);

@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:38:05 by smagassa          #+#    #+#             */
-/*   Updated: 2024/06/12 20:13:53 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:33:49 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 char	*ft_strchr(const char *str, int to_find)
 {
-	char	castb2;
+	int		i;
+	char	*p;
 
-	castb2 = (char)to_find;
-	while (*str)
+	i = 0;
+	if (!str)
+		return (NULL);
+	if (to_find == '\0')
+		return ((char *)&str[ft_strlen(str)]);
+	p = (char *)str;
+	while (str[i])
 	{
-		if (*str == castb2)
-			return ((char *)str);
-		str++;
+		if (str[i] == (char)to_find)
+			return (p);
+		i++;
+		p++;
 	}
-	if (castb2 == '\0')
-		return ((char *)str);
 	return (NULL);
 }

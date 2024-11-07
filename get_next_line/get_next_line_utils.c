@@ -6,13 +6,13 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 19:24:27 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/04 18:52:15 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:39:34 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ftstrlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
@@ -43,23 +43,33 @@ char	*cpynext(char *dest, char *src, char *src2)
 	return (dest);
 }
 
-char	*ftstrjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*stock;
+	size_t	i;
+	size_t	j;
+	char	*p;
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	else if (!s1)
+	i = -1;
+	j = 0;
+	if (!s1)
 	{
 		s1 = (char *)malloc(sizeof(char) * 1);
 		s1[0] = '\0';
 	}
-	stock = malloc(sizeof(char) * (ftstrlen(s1) + ftstrlen(s2) + 1));
-	if (stock == NULL)
+	p = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!p)
 		return (NULL);
-	cpynext(stock, s1, s2);
+	while (s1[++i])
+		p[i] = s1[i];
+	while (s2[j])
+	{
+		p[i] = s2[j];
+		i++;
+		j++;
+	}
+	p[i] = '\0';
 	free(s1);
-	return (stock);
+	return (p);
 }
 
 char	*ftstrchr(char *str, int to_find)
