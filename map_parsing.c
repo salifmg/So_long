@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:27:21 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/07 21:14:18 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:32:13 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,50 @@ int	ft_strln(char *str)
 	return (i);
 }
 
-int check_valid(char map)
+int check_valid(char **map)
 {
-	printf("%d\n", map);
-	if (map == '1' || map == '0' || map == 'P' || map == 'E' || map == 'C' || map == '\n')
-		return (1);
-	printf("BUG");
-	return (0);
-}
-
-int	check_events(char **map, t_data *mlx, int exit, int start, int collect)
-{
-	int	i;
-	int	i2;
+	int    i;
+	int    j;
 
 	i = 0;
 	while (map[i])
 	{
-		i2 = 0;
-		printf("%c", map[i][i2]);
-		while (map[i][i2])
+		j = 0;
+		while (map[i][j])
 		{
-			if (map[i][i2] == 'E')
-				exit++;
-			else if (map[i][i2] == 'P')
-				start++;
-			else if (map[i][i2] == 'C')
-				collect++;
-			else if (check_valid(map[i][i2]) == 0)
-				return (0);
-			i2++;
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P' &&
+					map[i][j] != 'E' && map[i][j] != 'C' && map[i][j] != '\n')
+					return (0);
+			j++;
 		}
 		i++;
 	}
-	printf("OK");
-	if (exit != 1 || start != 1 || collect < 1)
+	return (1);
+}
+
+int	check_events(char **map, t_data *mlx, int exit, int start)
+{
+	int    i;
+	int    j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'E')
+				exit++;
+			else if (map[i][j] == 'P')
+				start++;
+			else if (map[i][j] == 'C')
+				mlx->nb_collect++;
+			j++;
+		}
+		i++;
+	}
+	if (exit != 1 || start != 1 || mlx->nb_collect < 1)
 		return (0);
-	mlx->nb_collect = collect;
 	return (1);
 }
 
@@ -74,10 +81,8 @@ int	check_rectangle(char **map, t_data *mlx)
 			return (0);
 		y++;
 	}
-	if (mlx->y < 2 || mlx->x < 2 || mlx->y == mlx->x)
+	if (mlx->y <= 2 || mlx->x <= 2)
 		return (0);
-	else if ((mlx->y == 2 && mlx->x > 4) || (mlx->x == 2 && mlx->y > 4))
-		return (1);
 	return (1);
 }
 
@@ -90,10 +95,27 @@ int	check_walls(char **map, t_data *mlx)
 
 int	check_all(char **map, t_data *mlx)
 {
-	if (check_rectangle(map, mlx) == 0 || check_walls(map, mlx) == 0 ||
-			check_events(map, mlx, 0, 0, 0) == 0 ||
-			check_events_access(map, mlx))
+	if (check_rectangle(map, mlx) == 0)
 		return (0);
-	printf("OK");
+	if (check_walls(map, mlx) == 0)
+	{
+		write(1, "NOT SURROUNDED WITH WALLS\n", 26);
+		return (0);
+	}
+	if (check_events(map, mlx, 0, 0) == 0)
+	{
+		write(1, "SOME EVENTS ARE MISSING\n", 24);
+		return (0);
+	}
+	if (check_valid(map) == 0)
+	{
+		write(1, "SOME ELEMENTS ARE NOT MEANT TO BE HERE\n", 39);
+		return (0);
+	}
+	if (check_events_access(map, mlx) == 0)
+	{
+		write(1, "DONT HAVE THE ABILITY TO ACCESS ALL EVENTS\n", 43);
+		return (0);
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:03:37 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/06 20:02:52 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:45:59 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*strncpysrt(char *dest, char const *src, unsigned int start, int nb)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+char	*ft_substr2(char const *s, unsigned int start, int len)
 {
 	char	*str;
 

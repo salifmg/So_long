@@ -6,108 +6,125 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:59:16 by abeaudui          #+#    #+#             */
-/*   Updated: 2024/11/07 18:28:05 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:48:17 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static char	*read_and_addtostash(char *stash, int fd)
+char	*line_enlargment(int fd, char *nxt_l)
 {
-	int		check;
-	char	*buffer;
+	int		len_line;
+	char	*stk;
 
-	check = 1;
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buffer)
+	len_line = 1;
+	stk = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!stk)
 		return (NULL);
-	while (!ft_strchr(stash, '\n'))
+	while (!ft_strchr(nxt_l, '\n'))
 	{
-		check = read(fd, buffer, BUFFER_SIZE);
-		if (check == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[check] = '\0';
-		stash = ft_strjoin(stash, buffer);
-		if (check == 0 && stash)
-		{
-			free (buffer);
-			return (stash);
-		}
+		len_line = read(fd, stk, BUFFER_SIZE);
+		if (len_line == -1)
+			return (free(stk), NULL);
+		stk[len_line] = '\0';
+		nxt_l = ft_strjoin(nxt_l, stk);
+		if (len_line == 0 && nxt_l)
+			return (free(stk), nxt_l);
 	}
-	free (buffer);
-	return (stash);
+	free(stk);
+	return (nxt_l);
 }
 
-static char	*extract_and_addtoline(char *stash)
+char	*rest_of_line(char *nxt_l)
 {
 	int		i;
-	char	*line;
+	char	*res;
 
 	i = 0;
-	if (!*stash)
+	if (!*nxt_l)
 		return (NULL);
-	while (stash[i] && stash[i] != '\n')
+	while (nxt_l[i] && nxt_l[i] != '\n')
 		i++;
-	line = malloc(sizeof(unsigned char) * i + 2);
-	if (!line)
+	res = malloc(sizeof(char) * i + 2);
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (stash[i] && stash[i] != '\n')
+	while (nxt_l[i] && nxt_l[i] != '\n')
 	{
-			line[i] = stash[i];
-			i++;
-	}
-	if (stash[i] == '\n')
-	{
-		line[i] = stash[i];
+		res[i] = nxt_l[i];
 		i++;
 	}
-	line[i] = '\0';
-	return (line);
+	if (nxt_l[i] == '\n')
+	{
+		res[i] = nxt_l[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
 
-static char	*collect_andaddtostash(char *stash)
+char	*strncpysrt(char *dest, char *src, int start)
 {
-	char	*rest;
-	int		i;
-	int		j;
+	int	size;
 
-	j = 0;
-	i = 0;
-	rest = NULL;
-	while (stash[i] && stash[i] != '\n')
-			i++;
-	if (!stash[i])
+	size = 0;
+	while (src[start])
 	{
-		free (stash);
+		dest[size] = src[start];
+		size++;
+		start++;
+	}
+	dest[size] = '\0';
+	return (dest);
+}
+
+char	*ft_substr(char *nxt_l)
+{
+	char	*str;
+	int		start;
+
+	str = NULL;
+	start = 0;
+	while (nxt_l[start] && nxt_l[start] != '\n')
+		start++;
+	if (!nxt_l[start])
+		return (free(nxt_l), NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(nxt_l) - start) + 1);
+	if (!str)
 		return (NULL);
-	}		
-	rest = malloc(sizeof(char) * (ft_strlen(stash) - i) + 1);
-	if (!rest)
-		return (NULL);
-	i = i + 1;
-	while (stash[i])
-		rest[j++] = stash[i++];
-	rest[j] = '\0';
-	free (stash);
-	return (rest);
+	str = strncpysrt(str, nxt_l, start + 1);
+	free(nxt_l);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
-	char		*line;
+	static char	*nxt_l;
+	char		*buffer;
 
-	stash = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	stash = read_and_addtostash(stash, fd);
-	if (!stash)
 		return (NULL);
-	line = extract_and_addtoline(stash);
-	stash = collect_andaddtostash(stash);
-	return (line);
+	nxt_l = line_enlargment(fd, nxt_l);
+	if (!nxt_l)
+		return (NULL);
+	buffer = rest_of_line(nxt_l);
+	nxt_l = ft_substr(nxt_l);
+	return (buffer);
 }
+
+/*#include <fcntl.h>
+int main(void)
+{
+	char *line;
+	int fd;
+	fd = open("test.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
+}*/

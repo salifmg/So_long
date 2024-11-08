@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:03:46 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/07 16:59:06 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:24:46 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_lists(t_data *mlx)
 {
 	mlx->mlx = NULL;
+	mlx->moves = 0;
 	mlx->win = NULL;
 	mlx->img = NULL;
 	mlx->map = NULL;

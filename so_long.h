@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/07 19:30:38 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:12:35 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@
 # include "minilibx-linux/mlx.h"
 # include "get_next_line/get_next_line.h"
 
-# define GSIZE 16
+# define GSIZE 64
 
 typedef struct	s_data
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	
+	char	*av;
+
 	char	**map;
-	
+
 	char	*name;
 	char	*charact;
 	char	*collect;
@@ -51,7 +52,10 @@ typedef struct	s_data
 	int		x_pos;
 	int		y_pos;
 	int		nb_collect;
-	
+
+
+	int		moves;
+
 	// char		*addr;	
 	// int		bits_per_pixel;
 	// int		line_length;
@@ -70,22 +74,23 @@ int		check_walls(char **map, t_data *mlx);
 int		check_all(char **map, t_data *mlx);
 int		check_events_access(char **map, t_data *mlx);
 int		check_events_cpy(char **map);
-int		check_events(char **map, t_data *mlx, int exit, int start, int collect);
+int		check_valid(char **map);
+int		check_events(char **map, t_data *mlx, int exit, int start);
 
-int		up_arrow(void);
-int		down_arrow(void);
-int		left_arrow(void);
-int		right_arrow(void);
 int 	key_handler(int keycode, t_data *mlx);
 int 	current_state(t_data *mlx);
 int		close_window(t_data *mlx);
 
 char	**init_map(char	*name, t_data *mlx);
 
+void		up_arrow(t_data *mlx);
+void		down_arrow(t_data *mlx);
+void		left_arrow(t_data *mlx);
+void		right_arrow(t_data *mlx);
 void	init_lists(t_data *mlx);
 void	free_map(char **map);
 void	start_position(char **map_cpy, t_data *mlx);
-void	flood_fill(char **map_cpy, int x, int y);
+void	flood_fill(char **map_cpy, int y, int x);
 void	print_graphics(char **map, t_data *mlx);
 void	select_image(char map, t_data *mlx, int x, int y);
 void	*ft_put_img(t_data *mlx, char *path);

@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:12:36 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/07 18:50:47 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:29:49 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ char	**init_map(char	*name, t_data *mlx)
 	while (line)
 	{
 		map[i] = ft_strdup(line);
-		// printf("%s", line);
-		//printf(" LIGNE %s", map[i]);
-		if (line)
-			free(line);
+		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
