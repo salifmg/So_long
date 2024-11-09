@@ -40,29 +40,37 @@ CC = cc
 CC_FLAGS = -Wall -Wextra -Werror -g3
 
 %.o: %.c
-	$(CC) $(CC_FLAGS) -I $(HEAD) -c $< -o $@
+	@$(CC) $(CC_FLAGS) -I $(HEAD) -c $< -o $@
 
 all: $(LIBFT) $(MINI_LIBX) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L./libft -lft -L ./minilibx-linux -lmlx -lX11 -lXext -o $(NAME)
+	@echo "Creating the so_long executable."
+	@$(CC) $(OBJS) -L./libft -lft -L ./minilibx-linux -lmlx -lX11 -lXext -o $(NAME)
+	@echo "Compilation complete: so_long is ready!"
 
 $(LIBFT):
-	make bonus -C ./libft
+	@echo "Compiling libft."
+	@make bonus -C ./libft
 
 $(MINI_LIBX) :
-	make -C ./minilibx-linux
+	@echo "Compiling minilibx."
+	@make -C ./minilibx-linux
 	
 clean:
-	$(RM) $(OBJS)
-	make clean -C ./libft
-	make clean -C ./minilibx-linux
+	@echo "Cleaning object files."
+	@$(RM) $(OBJS)
+	@make clean -C ./libft
+	@make clean -C ./minilibx-linux
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) ./libft/libft.a
-	$(RM) ./minilibx-linux/minilibx.a
+	@echo "Removing the so_long executable and libraries."
+	@$(RM) $(NAME)
+	@$(RM) ./libft/libft.a
+	@$(RM) ./minilibx-linux/minilibx.a
 
-re: fclean all
+re: 
+	@echo "Rebuilding the entire project."
+	fclean all
 
 .PHONY: all clean fclean re
