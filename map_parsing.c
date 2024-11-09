@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:27:21 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 19:32:13 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:51:23 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,14 @@ int	check_walls(char **map, t_data *mlx)
 int	check_all(char **map, t_data *mlx)
 {
 	if (check_rectangle(map, mlx) == 0)
-		return (0);
+		return (write(2, "MAP NOT RECTANGULAR\n", 20), 0);
 	if (check_walls(map, mlx) == 0)
-	{
-		write(1, "NOT SURROUNDED WITH WALLS\n", 26);
-		return (0);
-	}
+		return (write(2, "MAP NOT SURROUNDED WITH WALLS\n", 30), 0);
 	if (check_events(map, mlx, 0, 0) == 0)
-	{
-		write(1, "SOME EVENTS ARE MISSING\n", 24);
-		return (0);
-	}
+		return (write(2, "SOME EVENTS ARE MISSING\n", 24), 0);
 	if (check_valid(map) == 0)
-	{
-		write(1, "SOME ELEMENTS ARE NOT MEANT TO BE HERE\n", 39);
-		return (0);
-	}
+		return (write(2, "SOME ELEMENTS ARE NOT MEANT TO BE HERE\n", 39), 0);
 	if (check_events_access(map, mlx) == 0)
-	{
-		write(1, "DONT HAVE THE ABILITY TO ACCESS ALL EVENTS\n", 43);
-		return (0);
-	}
+		return (write(2, "DONT HAVE THE ABILITY TO ACCESS ALL EVENTS\n", 43), 0);
 	return (1);
 }

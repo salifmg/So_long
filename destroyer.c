@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:17:50 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 18:41:52 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:43:34 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,24 @@ void	free_map(char **map)
 
 void	free_and_exit(t_data *mlx)
 {
-	mlx_destroy_image(mlx->mlx, mlx->charact);
-	mlx_destroy_image(mlx->mlx, mlx->collect);
-	mlx_destroy_image(mlx->mlx, mlx->exit);
-	mlx_destroy_image(mlx->mlx, mlx->tileset);
-	mlx_destroy_image(mlx->mlx, mlx->wall);
-	mlx_destroy_image(mlx->mlx, mlx->img);
+	if (mlx->charact)
+		mlx_destroy_image(mlx->mlx, mlx->charact);
+	if (mlx->collect)
+		mlx_destroy_image(mlx->mlx, mlx->collect);
+	if (mlx->exit)
+		mlx_destroy_image(mlx->mlx, mlx->exit);
+	if (mlx->tileset)
+		mlx_destroy_image(mlx->mlx, mlx->tileset);
+	if (mlx->wall)
+		mlx_destroy_image(mlx->mlx, mlx->wall);
+	if (mlx->img)	
+		mlx_destroy_image(mlx->mlx, mlx->img);
+
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
+	
 	mlx_loop_end(mlx->mlx);
+	
 	free_map(mlx->map);
 	free(mlx->mlx);
 	exit (1);

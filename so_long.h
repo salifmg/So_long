@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 16:12:35 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 16:52:05 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,15 @@ int		close_window(t_data *mlx);
 
 char	**init_map(char	*name, t_data *mlx);
 
-void		up_arrow(t_data *mlx);
-void		down_arrow(t_data *mlx);
-void		left_arrow(t_data *mlx);
-void		right_arrow(t_data *mlx);
+void	up_arrow(t_data *mlx);
+void	down_arrow(t_data *mlx);
+void	left_arrow(t_data *mlx);
+void	right_arrow(t_data *mlx);
 void	init_lists(t_data *mlx);
+void	map_check(char	**av, t_data *mlx);
+void	init_window(t_data *mlx);
+void	init_images(t_data *mlx);
+void	loop_visual_changes(t_data *mlx);
 void	free_map(char **map);
 void	start_position(char **map_cpy, t_data *mlx);
 void	flood_fill(char **map_cpy, int y, int x);

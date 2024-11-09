@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:12:36 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 15:29:49 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 21:07:27 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ char	**init_map(char	*name, t_data *mlx)
 	if (!map)
 		return (NULL);
 	line = get_next_line(fd);
+	if (!line)
+	{
+		free(map);
+		write(1, "EMPTY MAP\n", 10);
+		exit (1);
+	}
 	while (line)
 	{
 		map[i] = ft_strdup(line);
@@ -71,4 +77,19 @@ char	**init_map(char	*name, t_data *mlx)
 		free(line);
 	close(fd);
 	return (map);
+}
+
+void	map_check(char	**av, t_data *mlx)
+{
+	mlx->map = init_map(av[1], mlx);
+	if (!mlx->map)
+	{
+		write(2, "COULDN'T OPEN FILE\n", 19);
+		exit (1);
+	}
+	if (check_all(mlx->map, mlx) == 0)
+	{
+		free_map(mlx->map);
+		exit (1);
+	}
 }

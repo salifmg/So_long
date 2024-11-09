@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:49:02 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/07 16:45:21 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 21:00:14 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	img_to_display(t_data *mlx)
 	mlx->exit = ft_put_img(mlx, "images/exit.xpm");
 	mlx->tileset = ft_put_img(mlx, "images/tileset.xpm");
 	mlx->wall = ft_put_img(mlx, "images/wall.xpm");
+	if (mlx->charact == NULL || mlx->collect == NULL || mlx->exit == NULL ||
+		mlx->tileset == NULL || mlx->wall == NULL)
+	{
+		write(2,"CONVERT IMAGES FAIL\n", 20);
+		free_and_exit(mlx);
+	}
 }
 
 void	select_image(char map, t_data *mlx, int x, int y)
@@ -76,4 +82,10 @@ void	print_graphics(char **map, t_data *mlx)
 		}
 		i++;
 	}
+}
+
+void	init_images(t_data *mlx)
+{
+	mlx->img = mlx_new_image(mlx->mlx, GSIZE, GSIZE);
+	img_to_display(mlx);
 }

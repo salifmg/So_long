@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:27:03 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 17:26:18 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:05:53 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	up_arrow(t_data *mlx)
 		write(1, "Nombre de Mouvements : ", 23);
 		ft_putnbr(++mlx->moves);
 		write(1, "\n", 1);
+		write(1, "YOU WON BRAVO\n", 14); 
 		free_and_exit(mlx);
 	}
 	if (mlx->map[b - 1][a] != '1' && mlx->map[b - 1][a] != 'E')
@@ -97,6 +98,7 @@ void	down_arrow(t_data *mlx)
 		write(1, "Nombre de Mouvements : ", 23);
 		ft_putnbr(++mlx->moves);
 		write(1, "\n", 1);
+		write(1, "YOU WON BRAVO\n", 14); 
 		free_and_exit(mlx);
 	}
 	if (mlx->map[b + 1][a] != '1' && mlx->map[b + 1][a] != 'E')
@@ -124,6 +126,7 @@ void	left_arrow(t_data *mlx)
 		write(1, "Nombre de Mouvements : ", 23);
 		ft_putnbr(++mlx->moves);
 		write(1, "\n", 1);
+		write(1, "YOU WON BRAVO\n", 14); 
 		free_and_exit(mlx);
 	}
 	if (mlx->map[b][a - 1] != '1' && mlx->map[b][a - 1] != 'E')
@@ -150,6 +153,7 @@ void	right_arrow(t_data *mlx)
 		write(1, "Nombre de Mouvements : ", 23);
 		ft_putnbr(++mlx->moves);
 		write(1, "\n", 1);
+		write(1, "YOU WON BRAVO\n", 14); 
 		free_and_exit(mlx);
 	}
 	if (mlx->map[b][a + 1] != '1' && mlx->map[b][a + 1] != 'E')
