@@ -6,7 +6,7 @@
 #    By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/21 12:19:58 by smagassa          #+#    #+#              #
-#    Updated: 2024/11/10 15:42:29 by smagassa         ###   ########.fr        #
+#    Updated: 2024/11/10 16:48:24 by smagassa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ RM = rm -f
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CC_FLAGS = -Wall -Wextra -Werror -g3
+CC_FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = ./libft
 MINI_LIBX_DIR = ./minilibx-linux
