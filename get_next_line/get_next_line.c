@@ -6,11 +6,11 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:59:16 by abeaudui          #+#    #+#             */
-/*   Updated: 2024/11/08 15:48:17 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/10 15:38:45 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../sources/so_long.h"
 
 char	*line_enlargment(int fd, char *nxt_l)
 {
@@ -78,7 +78,7 @@ char	*strncpysrt(char *dest, char *src, int start)
 	return (dest);
 }
 
-char	*ft_substr(char *nxt_l)
+char	*ft_substr_gnl(char *nxt_l)
 {
 	char	*str;
 	int		start;
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 	if (!nxt_l)
 		return (NULL);
 	buffer = rest_of_line(nxt_l);
-	nxt_l = ft_substr(nxt_l);
+	nxt_l = ft_substr_gnl(nxt_l);
 	return (buffer);
 }
 

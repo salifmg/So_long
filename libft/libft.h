@@ -6,7 +6,7 @@
 /*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:08:22 by smagassa          #+#    #+#             */
-/*   Updated: 2024/11/08 15:46:17 by smagassa         ###   ########.fr       */
+/*   Updated: 2024/11/10 15:36:42 by smagassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *str, int to_find);
 char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_substr2(char const *s, unsigned int start, int len);
+char	*ft_substr(char const *s, unsigned int start, int len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		is_num(char str);

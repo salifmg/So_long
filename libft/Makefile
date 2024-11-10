@@ -6,7 +6,7 @@
 #    By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 19:08:33 by smagassa          #+#    #+#              #
-#    Updated: 2024/06/16 20:20:32 by smagassa         ###   ########.fr        #
+#    Updated: 2024/11/10 12:18:02 by smagassa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,21 +72,21 @@ CC = cc
 CC_FLAGS = -Wall -Wextra -Werror
 
 .c.o:
-	$(CC) $(FLAGS) -c -I $(HEAD) $< -o $(<:.c=.o)
+	@$(CC) $(FLAGS) -c -I $(HEAD) $< -o $(<:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
 
 bonus: $(OBJS) $(OBJS_BONUS)
-	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
+	@$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean:		clean
-			$(RM) $(NAME)
+			@$(RM) $(NAME)
 
 re: fclean all
 

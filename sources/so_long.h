@@ -1,0 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smagassa <smagassa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 11:36:58 by smagassa          #+#    #+#             */
+/*   Updated: 2024/11/10 16:24:41 by smagassa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <string.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <math.h>
+# include <X11/Xlib.h>
+# include <X11/Xutil.h>
+# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../get_next_line/get_next_line.h"
+
+# define GSIZE 64
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+
+	char	**map;
+
+	char	*charact;
+	char	*collect;
+	char	*exit;
+	char	*tileset;
+	char	*wall;
+
+	int		x;
+	int		y;
+	int		x_pos;
+	int		y_pos;
+	int		nb_collect;
+	int		nb_moves;
+}				t_data;
+
+int		ft_strln(char *str);
+int		map_size(char *name, t_data *mlx);
+int		row_of_one(char *map);
+int		corners_ones(char **map, t_data *mlx);
+int		top_bottom(char **map, t_data *mlx);
+int		check_extension(char *n);
+int		check_rectangle(char **map, t_data *mlx);
+int		check_walls(char **map, t_data *mlx);
+int		check_all(char **map, t_data *mlx);
+int		check_events_access(char **map, t_data *mlx);
+int		check_events_cpy(char **map);
+int		check_valid(char **map);
+int		check_events(char **map, t_data *mlx, int exit, int start);
+
+int		key_handler(int keycode, t_data *mlx);
+int		current_state(t_data *mlx);
+int		close_window(t_data *mlx);
+
+char	**init_map(char	*name, t_data *mlx);
+
+void	up_arrow(t_data *mlx);
+void	down_arrow(t_data *mlx);
+void	left_arrow(t_data *mlx);
+void	right_arrow(t_data *mlx);
+void	init_lists(t_data *mlx);
+void	ft_putchar(char c);
+void	ft_putnbr(int n);
+void	check_file(char **map, char *line);
+void	map_check(char **av, t_data *mlx);
+void	init_window(t_data *mlx);
+void	init_images(t_data *mlx);
+void	loop_visual_changes(t_data *mlx);
+void	free_map(char **map);
+void	start_position(char **map_cpy, t_data *mlx);
+void	flood_fill(char **map_cpy, int y, int x);
+void	print_graphics(char **map, t_data *mlx);
+void	select_image(char map, t_data *mlx, int x, int y);
+void	*ft_put_img(t_data *mlx, char *path);
+void	free_and_exit(t_data *mlx);
+void	img_to_display(t_data *mlx);
+
+#endif
